@@ -9,6 +9,7 @@ import 'package:shop/layout/cubit/shop_states.dart';
 import 'package:shop/models/category_model.dart';
 import 'package:shop/models/home_model.dart';
 import 'package:shop/models/product_model.dart';
+import 'package:shop/modules/search/search_screen.dart';
 import 'package:shop/shared/components/showtoast.dart';
 import 'package:shop/shared/styles/colors.dart';
 
@@ -26,6 +27,19 @@ class _ProductesScreenState extends State<ProductesScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: (){
+              Navigator.pushNamed(context, SearchScreen.id);
+            },
+            icon: Icon(
+              Icons.search,
+              color: Colors.black,
+            ),
+          )
+        ],
+      ),
       body: BlocConsumer<ShopCubit,ShopStates>(
         listener: (context,state){
           if(state is ShopSuccessChangeFavoritesStates)

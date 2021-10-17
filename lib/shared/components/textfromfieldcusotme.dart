@@ -10,9 +10,11 @@ Widget TextFormCustome({
   @required String? Function(String?)? validate,
   bool  isPassword  = false,
   IconData ? suffix,
+  bool  readOnly=false,
   void Function() ? suffixPressed,
 }) =>
     TextFormField(
+      readOnly: readOnly,
       controller: controller,
       obscureText: isPassword,
       keyboardType: typeText,

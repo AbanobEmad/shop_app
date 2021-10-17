@@ -13,25 +13,27 @@ class FavoritesScreen extends StatelessWidget {
       listener: (context,state){},
       builder: (context,state){
         var shopCubit=ShopCubit.get(context);
-        print(shopCubit.favoritesModel!.data!.data![0]);
-        return ConditionalBuilder(
-          condition: state is! ShopLoadingChangeFavoritesStates,
-          builder: (context){
-            return Scaffold(
-              body: ListView.separated(
-                  itemBuilder: (context,index)=>BuiltFavoriteItem(shopCubit.favoritesModel!.data!.data![index],context),
-                  separatorBuilder:(context,index)=> Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey[400],
+        return SafeArea(
+          top: true,
+          child: ConditionalBuilder(
+            condition: state is! ShopLoadingChangeFavoritesStates,
+            builder: (context){
+              return Scaffold(
+                body: ListView.separated(
+                    itemBuilder: (context,index)=>BuiltFavoriteItem(shopCubit.favoritesModel!.data!.data![index],context),
+                    separatorBuilder:(context,index)=> Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        height: 1,
+                        color: Colors.grey[400],
+                      ),
                     ),
-                  ),
-                  itemCount: shopCubit.favoritesModel!.data!.data!.length
-              ),
-            );
-          },
-          fallback: (context)=>Center(child: CircularProgressIndicator(),),
+                    itemCount: shopCubit.favoritesModel!.data!.data!.length
+                ),
+              );
+            },
+            fallback: (context)=>Center(child: CircularProgressIndicator(),),
+          ),
         );
       }
     );

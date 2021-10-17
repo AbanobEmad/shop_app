@@ -17,19 +17,6 @@ class HomeLayout extends StatelessWidget {
       builder: (context,state){
         var bottomNavBarCubit = ShopCubit.get(context);
         return Scaffold(
-          appBar: AppBar(
-            actions: [
-              IconButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, SearchScreen.id);
-                  },
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  ),
-              )
-            ],
-          ),
           body: PageView(
             physics: NeverScrollableScrollPhysics(),
             controller: bottomNavBarCubit.pagecontroller,

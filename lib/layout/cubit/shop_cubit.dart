@@ -54,7 +54,6 @@ class ShopCubit extends Cubit<ShopStates>
           element.id!:element.in_favorites!
         });
       });
-      print(favorites);
       emit(ShopSuccessHomeDataStates());
     }).catchError((Erorr) {
       emit(ShopErrorHomeDataStates(Erorr));
@@ -137,5 +136,6 @@ class ShopCubit extends Cubit<ShopStates>
       emit(ShopErrorGetUserDataStates(Erorr));
     });
   }
+
 
 }

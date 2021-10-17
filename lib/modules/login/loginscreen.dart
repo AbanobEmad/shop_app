@@ -33,8 +33,12 @@ class LoginScreen extends StatelessWidget {
               if(state.loginModel.status==true)
                 {
                   ShowToast(text: state.loginModel.message, state: ToastStates.SUCCESS);
-                  CacheHelper.SaveData(key: TOKEN, value: state.loginModel.data!.token);
-                  Navigator.pushReplacementNamed(context,HomeLayout.id );
+                  CacheHelper.SaveData(key: TOKEN, value: state.loginModel.data!.token).then((value) {
+
+                    token = state.loginModel.data!.token!;
+                    Navigator.pushReplacementNamed(context,HomeLayout.id );
+                  });
+
                 }
               else{
                 ShowToast(text: state.loginModel.message, state: ToastStates.ERROR);
