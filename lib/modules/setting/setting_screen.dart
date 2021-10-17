@@ -6,6 +6,7 @@ import 'package:shop/layout/cubit/shop_states.dart';
 import 'package:shop/modules/login/loginscreen.dart';
 import 'package:shop/shared/components/buttoncustome.dart';
 import 'package:shop/shared/components/constant.dart';
+import 'package:shop/shared/components/showtoast.dart';
 import 'package:shop/shared/components/textfromfieldcusotme.dart';
 import 'package:shop/shared/network/local/cache_helper.dart';
 import 'package:shop/shared/styles/colors.dart';
@@ -31,7 +32,19 @@ class _SettingScreenState extends State<SettingScreen> {
     var phoneController =TextEditingController();
 
     return BlocConsumer<ShopCubit,ShopStates>(
-      listener: (context,state){},
+      listener: (context,state){
+        if(state is ShopSuccessUpdataUserDataStates)
+          {
+            if(state.loginModel.status==false)
+              {
+                ShowToast(text: state.loginModel.message, state: ToastStates.ERROR);
+              }
+            else
+              {
+                ShowToast(text: state.loginModel.message, state: ToastStates.SUCCESS);
+              }
+          }
+      },
       builder: (context,state){
         var shopcuibt = ShopCubit.get(context);
         userNameController.text =shopcuibt.userData!.data!.name!;
@@ -98,7 +111,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             TextFormCustome(
                                 lable: 'Phone',
                                 prefix: Icons.phone,
-                                controller: emailController,
+                                controller: phoneController,
                                 typeText: TextInputType.text,
                                 validate: null,
                                 readOnly: readOnly[0],
@@ -146,7 +159,11 @@ class _SettingScreenState extends State<SettingScreen> {
                               height: 20,
                             ),
                             ButtonCustome(
-                                onpassed: !readOnly[0]||!readOnly[1]||!readOnly[2]  ? ()=> print('asd') : null,
+                                onpassed: !readOnly[0]||!readOnly[1]||!readOnly[2]  ? ()=> shopcuibt.updataData(
+                                    name: userNameController.text,
+                                    email: emailController.text,
+                                    phone: phoneController.text
+                                ) : null,
                                 context: context,
                                 title: 'Update data'),
                             SizedBox(
