@@ -87,3 +87,15 @@ class ShopErrorUpdataUserDataStates extends ShopStates{
   ShopErrorUpdataUserDataStates(this.error);
 
 }
+
+class ShopLoadingProductOfCategoryStates extends ShopStates{}
+
+class ShopSuccessProductOfCategoryStates extends ShopStates{}
+
+class ShopErrorProductOfCategoryStates extends ShopStates{
+
+  final  error;
+
+  ShopErrorProductOfCategoryStates(this.error);
+
+}

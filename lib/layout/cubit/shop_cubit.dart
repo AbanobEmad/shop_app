@@ -6,9 +6,11 @@ import 'package:shop/models/changefavorites_model.dart';
 import 'package:shop/models/favorites_model.dart';
 import 'package:shop/models/home_model.dart';
 import 'package:shop/models/loginmodel.dart';
+import 'package:shop/models/porducts_of_category.dart';
 import 'package:shop/modules/categories/cateogries_screen.dart';
 import 'package:shop/modules/favorites/favorites_screen.dart';
 import 'package:shop/modules/productes/productes_screen.dart';
+import 'package:shop/modules/products_of_category/products_of_category.dart';
 import 'package:shop/modules/setting/setting_screen.dart';
 import 'package:shop/shared/components/constant.dart';
 import 'package:shop/shared/network/end_points.dart';
@@ -145,8 +147,6 @@ class ShopCubit extends Cubit<ShopStates>
     required String phone,
 
 }){
-    emit(ShopLoadingUpdataUserDataStates());
-    print(token);
     DioHelper.PutData(
         url: EDIT_PROFILE,
         token: token,
@@ -168,4 +168,24 @@ class ShopCubit extends Cubit<ShopStates>
     });
   }
 
+  ProductOfCategoryModel ? productsOfCategory;
+  Future<void> getProductOfCategory(String id)async {
+    emit(ShopLoadingProductOfCategoryStates());
+    String url=GET_CATEGORIES+'/'+id;
+    print(url);
+   await DioHelper.getData(
+        url: url,
+        token: token
+    ).then((value) {
+      productsOfCategory=ProductOfCategoryModel.fromJson(value.data);
+      productsOfCategory!.data!.data!.forEach((element) {
+        favorites.addAll({
+          element.id!:element.in_favorites!
+        });
+      });
+      emit(ShopSuccessProductOfCategoryStates());
+    }).catchError((error){
+      emit(ShopErrorProductOfCategoryStates(error));
+    });
+  }
 }

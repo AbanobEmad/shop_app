@@ -9,6 +9,7 @@ import 'package:shop/layout/cubit/shop_cubit.dart';
 import 'package:shop/layout/shoplayout.dart';
 import 'package:shop/modules/login/loginscreen.dart';
 import 'package:shop/modules/on_boarding/on_boarding_screen.dart';
+import 'package:shop/modules/products_of_category/products_of_category.dart';
 import 'package:shop/modules/register/registerscreen.dart';
 import 'package:shop/modules/search/search_screen.dart';
 import 'package:shop/shared/components/constant.dart';
@@ -67,7 +68,8 @@ class MyApp extends StatelessWidget {
           LoginScreen.id : (context)=>LoginScreen(),
           RegisterScreen.id :(context)=>RegisterScreen(),
           HomeLayout.id:(context)=>HomeLayout(),
-          SearchScreen.id : (context)=>SearchScreen()
+          SearchScreen.id : (context)=>SearchScreen(),
+          ProductsOfCategory.id :(context)=>ProductsOfCategory(ModalRoute.of(context)!.settings.arguments),
         },
         home: OnBoardingScreen()
       ),

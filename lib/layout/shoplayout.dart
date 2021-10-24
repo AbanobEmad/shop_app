@@ -45,10 +45,10 @@ class HomeLayout extends StatelessWidget {
             {
               bottomNavBarCubit.ChangeBottomNavBar(index);
             },
-              backgroundColor: defaultColor,
+              backgroundColor: defaultColor[300],
               selectedItemColor: Colors.black,
-              unselectedItemColor: Colors.grey,
-            itemBackgroudnColor: Colors.redAccent,
+              unselectedItemColor: Colors.black54,
+             itemBackgroudnColor: defaultColor,
 
           ),
         );
